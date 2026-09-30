@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <title>AETIS Bio/Tech</title>
+    <style>
+      :root {
+        --bg: #e7e1d3;
+        --main: #12233a;
+        --accent: #e85327;
+        --gray-dark: #5a5a56;
+        --gray-mid: #8a8a84;
+        --gray-line: #c9c2b2;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        border-radius: 0;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--gray-dark);
+        font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      }
+
+      .serif {
+        font-family: 'Noto Serif SC', Georgia, 'Times New Roman', serif;
+      }
+
+      .container {
+        max-width: 72rem;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+
+      section {
+        padding: 6rem 0;
+      }
+
+      .section-label {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 0.75rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+
+      .section-label::before {
+        content: '';
+        display: inline-block;
+        width: 3rem;
+        height: 1px;
+        background: var(--accent);
+      }
+
+      .section-title {
+        margin-top: 1rem;
+        font-family: 'Noto Serif SC', Georgia, serif;
+        font-size: 1.875rem;
+        font-weight: 700;
+        color: var(--main);
+      }
+
+      /* ---------- 区块占位框架 ---------- */
+
+      .hero {
+        min-height: 70vh;
+        display: flex;
+        align-items: center;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 4rem;
+        align-items: center;
+      }
+
+      @media (min-width: 768px) {
+        .hero-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      .hero-crumb {
+        font-size: 0.75rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--gray-mid);
+      }
+
+      .hero-crumb .sep {
+        color: var(--accent);
+        margin: 0 0.5rem;
+      }
+
+      .hero-crumb .current {
+        color: var(--main);
+      }
+
+      .hero-title {
+        margin-top: 1.5rem;
+        font-family: 'Noto Serif SC', Georgia, serif;
+        font-size: 3rem;
+        font-weight: 900;
+        line-height: 1.25;
+        color: var(--main);
+      }
+
+      .hero-sub {
+        margin-top: 1.25rem;
+        font-size: 1.25rem;
+        font-weight: 500;
+        color: var(--accent);
+      }
+
+      .hero-body {
+        margin-top: 1.5rem;
+        max-width: 34rem;
+        font-size: 1rem;
+        line-height: 1.9;
+        color: var(--gray-dark);
+      }
+
+      .placeholder-box {
+        aspect-ratio: 4 / 3;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px dashed var(--gray-mid);
+        background: rgba(255, 255, 255, 0.35);
+        font-size: 0.875rem;
+        letter-spacing: 0.15em;
+        color: var(--gray-mid);
+        text-align: center;
+        padding: 1rem;
+      }
+
+      .matrix {
+        border-top: 1px solid var(--gray-line);
+      }
+
+      .cases {
+        border-top: 1px solid var(--gray-line);
+      }
+
+      .cta {
+        border-top: 1px solid var(--gray-line);
+        padding-bottom: 8rem;
+      }
+
+      /* ---------- 深度案例檔案 ---------- */
+
+      .case-list {
+        margin-top: 3rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+      }
+
+      .case-card {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        align-items: center;
+        border: 1px solid var(--main);
+        padding: 2.5rem;
+      }
+
+      @media (min-width: 768px) {
+        .case-card {
+          grid-template-columns: 3fr 2fr;
+          gap: 3rem;
+        }
+      }
+
+      .case-index {
+        font-size: 0.75rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+
+      .case-card h3 {
+        margin-top: 0.75rem;
+        font-family: 'Noto Serif SC', Georgia, serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--main);
+      }
+
+      .case-card p {
+        margin-top: 1rem;
+        font-size: 0.9375rem;
+        line-height: 1.9;
+        color: var(--gray-dark);
+      }
+
+      /* ---------- 業務鏈引導 ---------- */
+
+      .cta-text {
+        margin-top: 2rem;
+        max-width: 40rem;
+        font-size: 1rem;
+        line-height: 1.9;
+        color: var(--gray-dark);
+      }
+
+      .cta-btn {
+        margin-top: 2rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: var(--accent);
+        color: #fff;
+        padding: 0.875rem 2rem;
+        font-size: 0.875rem;
+        letter-spacing: 0.15em;
+        text-decoration: none;
+        transition: background 0.2s ease;
+      }
+
+      .cta-btn:hover {
+        background: #c8431a;
+      }
+
+      /* ---------- 核心能力矩陣 ---------- */
+
+      .matrix-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 4rem;
+        margin-top: 3rem;
+      }
+
+      @media (min-width: 768px) {
+        .matrix-grid {
+          grid-template-columns: 3fr 2fr;
+          gap: 5rem;
+        }
+      }
+
+      .cap-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .cap-box {
+        border: 1px solid var(--main);
+        padding: 1.75rem 2rem;
+      }
+
+      .cap-box h3 {
+        font-family: 'Noto Serif SC', Georgia, serif;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--main);
+      }
+
+      .cap-box p {
+        margin-top: 0.75rem;
+        font-size: 0.9375rem;
+        line-height: 1.8;
+        color: var(--gray-dark);
+      }
+
+      .stat-list {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 2.75rem;
+      }
+
+      .stat-item {
+        display: flex;
+        align-items: baseline;
+        gap: 1rem;
+      }
+
+      .stat-sq {
+        align-self: center;
+        width: 0.625rem;
+        height: 0.625rem;
+        background: var(--accent);
+        flex-shrink: 0;
+      }
+
+      .stat-num {
+        font-family: 'Noto Serif SC', Georgia, serif;
+        font-size: 3rem;
+        font-weight: 900;
+        line-height: 1;
+        color: var(--main);
+      }
+
+      .stat-label {
+        margin-left: 0.5rem;
+        font-size: 0.9375rem;
+        color: var(--gray-dark);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 01 Hero -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <div class="hero-crumb">
+              AETIS GROUP<span class="sep">/</span>DIVISIONS<span class="sep">/</span><span class="current">BIO/TECH</span>
+            </div>
+            <h1 class="serif hero-title">把未知變成可控</h1>
+            <p class="hero-sub">外星殘骸研究與異能材料分析</p>
+            <p class="hero-body">
+              AETIS Bio/Tech 專注於超常材料的科學解析：從外星殘骸的結構鑑定、異能材料的性能分析，
+              到生物樣本的封存與研究，我們以前沿實驗設施與跨學科團隊，將每一次未知接觸轉化為
+              可驗證、可復現、可應用的技術資產，為集團的災害應對體系提供底層科學支撐。
+            </p>
+          </div>
+          <div class="placeholder-box">Bio/Tech 實驗室圖片（佔位）</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 核心能力矩阵 -->
+    <section class="matrix">
+      <div class="container">
+        <div class="section-label">Capabilities</div>
+        <h2 class="section-title">核心能力矩陣</h2>
+
+        <div class="matrix-grid">
+          <!-- 左：三個能力模組 -->
+          <div class="cap-list">
+            <div class="cap-box">
+              <h3>材料分析</h3>
+              <p>對外星殘骸與異能材料進行成分鑑定、結構解析與性能測試，建立標準化的分析流程與數據檔案。</p>
+            </div>
+            <div class="cap-box">
+              <h3>逆向工程</h3>
+              <p>從未知材料與裝置中拆解其構造原理，復現關鍵工藝，形成可量產、可驗證的技術方案。</p>
+            </div>
+            <div class="cap-box">
+              <h3>臨床轉化</h3>
+              <p>將研究成果轉化為面向實戰的應用方案，涵蓋生物樣本評估、安全性驗證與場景化落地。</p>
+            </div>
+          </div>
+
+          <!-- 右：三組大數字 -->
+          <div class="stat-list">
+            <div class="stat-item">
+              <span class="stat-sq"></span>
+              <span class="stat-num">27</span>
+              <span class="stat-label">項超常材料專利</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-sq"></span>
+              <span class="stat-num">15</span>
+              <span class="stat-label">種臨床轉化方案</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-sq"></span>
+              <span class="stat-num">08</span>
+              <span class="stat-label">類異能材料數據庫</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 深度案例档案 -->
+    <section class="cases">
+      <div class="container">
+        <div class="section-label">Case Files</div>
+        <h2 class="section-title">深度案例檔案</h2>
+
+        <div class="case-list">
+          <!-- 案例一 -->
+          <article class="case-card">
+            <div>
+              <div class="case-index">案例檔案 01</div>
+              <h3>X-09 殘骸能量結晶化項目</h3>
+              <p>
+                針對 X-09 事件回收的外星殘骸，ABT 材料實驗室完成了能量結晶化的穩定化處理，
+                使殘骸中原本不可控的游離能量得以固化、儲存與分級利用，為城市重建與應急能源
+                供應提供了全新方案。
+              </p>
+            </div>
+            <div class="placeholder-box">X-09 項目配圖（佔位）</div>
+          </article>
+
+          <!-- 案例二 -->
+          <article class="case-card">
+            <div>
+              <div class="case-index">案例檔案 02</div>
+              <h3>異能生物樣本的醫學轉化</h3>
+              <p>
+                從災害現場採集的異能生物樣本，經 ABT 生物實驗室的分離、純化與安全性驗證後，
+                逐步轉化為可臨床應用的醫學資源，涵蓋創傷修復、應急藥物等多個方向。
+              </p>
+            </div>
+            <div class="placeholder-box">醫學轉化配圖（佔位）</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 底部业务链引导 -->
+    <section class="cta">
+      <div class="container">
+        <div class="section-label">Business Chain</div>
+        <h2 class="section-title">業務鏈引導</h2>
+        <p class="cta-text">ABT 的研究成果，正等待著下一環節的落地。</p>
+        <a class="cta-btn" href="afo.html">了解 AFO 如何第一時間獲取超常殘骸 →</a>
+      </div>
+    </section>
+  </body>
+</html>

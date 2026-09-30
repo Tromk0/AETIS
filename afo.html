@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <title>AETIS Field Operations</title>
+    <style>
+      :root {
+        --bg: #e8e8e8;
+        --main: #2a3328;
+        --accent: #f0a500;
+        --gray-dark: #4c534a;
+        --gray-mid: #8b9187;
+        --gray-line: #c6c9c2;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        border-radius: 0;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--gray-dark);
+        font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      }
+
+      .container {
+        max-width: 72rem;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+
+      section {
+        padding: 6rem 0;
+      }
+
+      .section-label {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 0.75rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+
+      .section-label::before {
+        content: '';
+        display: inline-block;
+        width: 3rem;
+        height: 1px;
+        background: var(--accent);
+      }
+
+      .section-title {
+        margin-top: 1rem;
+        font-family: 'Noto Serif SC', Georgia, serif;
+        font-size: 1.875rem;
+        font-weight: 700;
+        color: var(--main);
+      }
+
+      /* ---------- Hero ---------- */
+
+      .hero {
+        min-height: 70vh;
+        display: flex;
+        align-items: center;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 4rem;
+        align-items: center;
+      }
+
+      @media (min-width: 768px) {
+        .hero-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      .hero-crumb {
+        font-size: 0.75rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--gray-mid);
+      }
+
+      .hero-crumb .sep {
+        color: var(--accent);
+        margin: 0 0.5rem;
+      }
+
+      .hero-crumb .current {
+        color: var(--main);
+      }
+
+      .hero-title {
+        margin-top: 1.5rem;
+        font-family: 'Noto Serif SC', Georgia, serif;
+        font-size: 3rem;
+        font-weight: 900;
+        line-height: 1.25;
+        color: var(--main);
+      }
+
+      .hero-sub {
+        margin-top: 1.25rem;
+        font-size: 1.25rem;
+        font-weight: 500;
+        color: var(--accent);
+      }
+
+      .hero-body {
+        margin-top: 1.5rem;
+        max-width: 34rem;
+        font-size: 1rem;
+        line-height: 1.9;
+        color: var(--gray-dark);
+      }
+
+      .placeholder-box {
+        aspect-ratio: 4 / 3;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px dashed var(--gray-mid);
+        background: rgba(255, 255, 255, 0.4);
+        font-size: 0.875rem;
+        letter-spacing: 0.15em;
+        color: var(--gray-mid);
+        text-align: center;
+        padding: 1rem;
+      }
+
+      /* ---------- 垂直時間軸 ---------- */
+
+      .timeline-sec {
+        border-top: 1px solid var(--gray-line);
+      }
+
+      .timeline {
+        position: relative;
+        margin-top: 3rem;
+      }
+
+      .timeline::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 1.25rem;
+        width: 1px;
+        background: var(--gray-line);
+      }
+
+      .tl-item {
+        position: relative;
+        padding-left: 3.5rem;
+        padding-bottom: 3rem;
+      }
+
+      .tl-item:last-child {
+        padding-bottom: 0;
+      }
+
+      .tl-dot {
+        position: absolute;
+        top: 0.5rem;
+        left: 1.25rem;
+        width: 0.75rem;
+        height: 0.75rem;
+        background: var(--bg);
+        border: 2px solid var(--accent);
+        transform: translateX(-50%);
+      }
+
+      .tl-card {
+        border: 1px solid var(--main);
+        padding: 2rem;
+      }
+
+      .tl-index {
+        font-size: 0.75rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+
+      .tl-title {
+        margin-top: 0.75rem;
+        font-family: 'Noto Serif SC', Georgia, serif;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--main);
+      }
+
+      .tl-desc {
+        margin-top: 0.75rem;
+        font-size: 0.9375rem;
+        line-height: 1.8;
+        color: var(--gray-dark);
+      }
+
+      .tl-img {
+        margin-top: 1.5rem;
+        aspect-ratio: 16 / 9;
+      }
+
+      @media (min-width: 768px) {
+        .timeline::before {
+          left: 50%;
+        }
+
+        .tl-item {
+          width: 50%;
+          padding-left: 0;
+          padding-bottom: 4rem;
+        }
+
+        .tl-item:nth-child(odd) {
+          padding-right: 3.5rem;
+        }
+
+        .tl-item:nth-child(odd) .tl-dot {
+          left: auto;
+          right: 0;
+          transform: translateX(50%);
+        }
+
+        .tl-item:nth-child(even) {
+          margin-left: 50%;
+          padding-left: 3.5rem;
+        }
+
+        .tl-item:nth-child(even) .tl-dot {
+          left: 0;
+          transform: translateX(-50%);
+        }
+      }
+
+      /* ---------- 底部引導 ---------- */
+
+      .cta {
+        border-top: 1px solid var(--gray-line);
+        padding-bottom: 8rem;
+      }
+
+      .cta-text {
+        margin-top: 2rem;
+        max-width: 40rem;
+        font-size: 1rem;
+        line-height: 1.9;
+        color: var(--gray-dark);
+      }
+
+      .cta-btn {
+        margin-top: 2rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: var(--accent);
+        color: var(--main);
+        font-weight: 700;
+        padding: 0.875rem 2rem;
+        font-size: 0.875rem;
+        letter-spacing: 0.15em;
+        text-decoration: none;
+        transition: opacity 0.2s ease;
+      }
+
+      .cta-btn:hover {
+        opacity: 0.85;
+      }
+
+      /* ---------- 頁腳 ---------- */
+
+      .footer {
+        border-top: 1px solid var(--gray-line);
+        padding: 2rem 0;
+      }
+
+      .footer .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .footer a {
+        color: var(--main);
+        font-size: 0.875rem;
+        letter-spacing: 0.15em;
+        text-decoration: none;
+        border-bottom: 1px solid var(--accent);
+        padding-bottom: 0.125rem;
+      }
+
+      .footer span {
+        font-size: 0.75rem;
+        letter-spacing: 0.25em;
+        color: var(--gray-mid);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 01 Hero -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <div class="hero-crumb">
+              AETIS GROUP<span class="sep">/</span>DIVISIONS<span class="sep">/</span><span class="current">FIELD OPERATIONS</span>
+            </div>
+            <h1 class="hero-title">標題佔位（Hero Title）</h1>
+            <p class="hero-sub">副標題佔位（Hero Subtitle）</p>
+            <p class="hero-body">簡介文字佔位：此處放置 AFO 部門的簡介段落，說明其職能、範圍與在集團業務鏈中的位置。</p>
+          </div>
+          <div class="placeholder-box">Hero 配圖佔位</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 垂直時間軸 -->
+    <section class="timeline-sec">
+      <div class="container">
+        <div class="section-label">Timeline</div>
+        <h2 class="section-title">時間軸標題佔位</h2>
+
+        <div class="timeline">
+          <!-- 節點 01 -->
+          <div class="tl-item">
+            <span class="tl-dot" aria-hidden></span>
+            <div class="tl-card">
+              <div class="tl-index">節點 01</div>
+              <h3 class="tl-title">節點標題佔位</h3>
+              <p class="tl-desc">節點描述佔位：此處放置該節點的說明文字。</p>
+              <div class="placeholder-box tl-img">節點配圖佔位（01）</div>
+            </div>
+          </div>
+
+          <!-- 節點 02 -->
+          <div class="tl-item">
+            <span class="tl-dot" aria-hidden></span>
+            <div class="tl-card">
+              <div class="tl-index">節點 02</div>
+              <h3 class="tl-title">節點標題佔位</h3>
+              <p class="tl-desc">節點描述佔位：此處放置該節點的說明文字。</p>
+              <div class="placeholder-box tl-img">節點配圖佔位（02）</div>
+            </div>
+          </div>
+
+          <!-- 節點 03 -->
+          <div class="tl-item">
+            <span class="tl-dot" aria-hidden></span>
+            <div class="tl-card">
+              <div class="tl-index">節點 03</div>
+              <h3 class="tl-title">節點標題佔位</h3>
+              <p class="tl-desc">節點描述佔位：此處放置該節點的說明文字。</p>
+              <div class="placeholder-box tl-img">節點配圖佔位（03）</div>
+            </div>
+          </div>
+
+          <!-- 節點 04 -->
+          <div class="tl-item">
+            <span class="tl-dot" aria-hidden></span>
+            <div class="tl-card">
+              <div class="tl-index">節點 04</div>
+              <h3 class="tl-title">節點標題佔位</h3>
+              <p class="tl-desc">節點描述佔位：此處放置該節點的說明文字。</p>
+              <div class="placeholder-box tl-img">節點配圖佔位（04）</div>
+            </div>
+          </div>
+
+          <!-- 節點 05 -->
+          <div class="tl-item">
+            <span class="tl-dot" aria-hidden></span>
+            <div class="tl-card">
+              <div class="tl-index">節點 05</div>
+              <h3 class="tl-title">節點標題佔位</h3>
+              <p class="tl-desc">節點描述佔位：此處放置該節點的說明文字。</p>
+              <div class="placeholder-box tl-img">節點配圖佔位（05）</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 底部引導 -->
+    <section class="cta">
+      <div class="container">
+        <div class="section-label">Business Chain</div>
+        <h2 class="section-title">業務鏈引導標題佔位</h2>
+        <p class="cta-text">引導語佔位：一句話過渡到集團業務鏈的下一個部門。</p>
+        <!-- TODO: 填入下一個部門頁鏈接 -->
+        <a class="cta-btn" href="#">按鈕佔位 →</a>
+      </div>
+    </section>
+
+    <!-- 頁腳 -->
+    <footer class="footer">
+      <div class="container">
+        <span>AETIS GROUP · FIELD OPERATIONS</span>
+        <a href="/">← 返回首頁</a>
+      </div>
+    </footer>
+  </body>
+</html>
